@@ -12,6 +12,7 @@ jobs:
         # caching must be done before the part you wanna cache is ran
         # check documentations for gradle and maven
         # note this cache is not stored on the runner (ubuntu-latest) rather in an external directory accessible to all the jobs
+        # changing something major or some app dependency, invalidates the cache and another recreated
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
