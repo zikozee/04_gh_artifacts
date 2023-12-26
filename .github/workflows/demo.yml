@@ -25,6 +25,19 @@ jobs:
         run: npm ci
       - name: Build website
         run: npm run build
+      - name: list files
+        run: ls -a
+      # uploading artifacts
+      # check documentations for other options
+      # gradle we could do ==>>>   path: build/libs/*.jar    (single artifact)
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-files
+          # uploading multiple files
+          path: |
+            dist
+            package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
