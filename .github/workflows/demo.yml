@@ -44,7 +44,7 @@ jobs:
         run: npm run build
       - name: Publish JS filename
         id: publish
-        ## alternative==>  find dist/assets/*.js -type f -execdir echo '::set-output name=script_file::{}' ';'
+        ## alternative===>  find dist/assets/*.js -type f -execdir echo '::set-output name=script_file::{}' ';'
         run: find dist/assets/*.js -type f -execdir echo 'script_file={}' >> $GITHUB_OUTPUT ';'
       - name: list files
         run: ls -a
