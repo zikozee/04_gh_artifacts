@@ -9,6 +9,15 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+        # caching must be done before the part you wanna cache is ran
+        # check documentations for gradle and maven
+        # note this cache is not stored on the runner (ubuntu-latest) rather in an external directory accessible to all the jobs
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+         path: ~/.npm
+         # used to retrieve the cache
+         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
       - name: Lint code
@@ -23,6 +32,12 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          # used to retrieve the cache
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
       - name: Build website
