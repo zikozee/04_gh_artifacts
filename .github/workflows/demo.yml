@@ -30,7 +30,7 @@ jobs:
       # uploading artifacts
       # check documentations for other options
       # gradle we could do ==>>>   path: build/libs/*.jar    (single artifact)
-      # note this zips the artifact. hence, do an ls to be sure or download artifact manually as before its what you need
+      # note this zips the artifact. hence, do a "ls" to be sure or download artifact manually to be sure it's what you need
       - name: upload artifacts
         uses: actions/upload-artifact@v3
         with:
