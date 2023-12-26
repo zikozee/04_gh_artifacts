@@ -30,17 +30,28 @@ jobs:
       # uploading artifacts
       # check documentations for other options
       # gradle we could do ==>>>   path: build/libs/*.jar    (single artifact)
+      # note this zips the artifact. hence, do an ls to be sure or download artifact manually as before its what you need
       - name: upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: dist-files
-          # uploading multiple files
-          path: |
-            dist
-            package.json
+          path: dist
+          ## uploading multiple files
+          #path: |
+          #  dist
+          #  package.json
   deploy:
+    # below required, so we can ensure, the above job finish running before triggering the deployment
     needs: build
     runs-on: ubuntu-latest
     steps:
+      # note this downloads and unzips the content
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          # same name as the uploaded artifact step
+          name: dist-files
+      - name: Output contents
+        run: ls
       - name: Deploy
         run: echo "Deploying..."
